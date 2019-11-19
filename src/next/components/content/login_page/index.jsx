@@ -5,15 +5,6 @@ class LoginPageContent extends React.Component {
   render() {
     return (
       <div id="login-page-content">
-      <style jsx>
-      {`
-        input {
-          width: 100%;
-          display: block;
-          background: blue;
-        }
-      `}
-      </style>
         <LoginForm/>
       </div>
     )
