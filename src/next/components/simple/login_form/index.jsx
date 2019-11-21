@@ -1,5 +1,6 @@
 // Render Prop
 import React from 'react';
+import Router from 'next/router'
 import fetch from 'isomorphic-unfetch';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -44,7 +45,7 @@ class LoginForm extends React.Component {
       .then(data => data.token)
       .then(token => {
         localStorage.setItem('usertoken', token);
-        console.log(`usertoken: ${token}`)
+        Router.push('/profile');
       })
       .catch(err => console.error(err));
   }
