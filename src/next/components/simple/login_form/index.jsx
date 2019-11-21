@@ -1,5 +1,6 @@
 // Render Prop
 import React from 'react';
+import Router from 'next/router'
 import fetch from 'isomorphic-unfetch';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Button, Form, FormGroup, FormFeedback, Label, Input } from 'reactstrap'
@@ -26,28 +27,6 @@ class LoginForm extends React.Component {
     };
   }
 
-  // submitHandler = event => {
-  //   event.preventDefault();
-  //   console.dir(this.state.formControl);
-
-  //   fetch(config.apiLocation + '/authentication/login/karma', {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       "email": this.state.formControl.email.value,
-  //       "password": this.state.formControl.password.value
-  //     }),
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => data.token)
-  //     .then(token => {
-  //       localStorage.setItem('usertoken', token);
-  //       console.log(`usertoken: ${token}`)
-  //     })
-  //     .catch(err => console.error(err));
-  // }
 
   validateEmail(e) {
     const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -117,7 +96,8 @@ class LoginForm extends React.Component {
         .then(data => data.token)
         .then(token => {
           localStorage.setItem('usertoken', token);
-          console.log(`usertoken: ${token}`)
+          console.log(`usertoken: ${token}`);
+          Router.push('/profile');
         })
         .catch(err => console.error(err));
     }    

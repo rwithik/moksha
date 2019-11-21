@@ -4,6 +4,7 @@ routes
   .add({ name: 'home_page', pattern: '/', page: 'index' })
   .add({ name: 'about', pattern: '/about', page: 'about/college' })
   .add({ name: 'login', pattern: '/login', page: 'login' })
+  .add({ name: 'profile', pattern: '/profile', page: 'profile' })
   .add({
     name: 'administration',
     pattern: '/about/administration',
