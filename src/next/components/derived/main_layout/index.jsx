@@ -5,7 +5,7 @@ import MainContainer from '../../simple/main_container';
 import TopBar from '../top_bar';
 
 // const actions = ['Login', 'Settings'];
-const actions = [];
+const actions = ['login', 'register'];
 
 class MainLayout extends React.Component {
   render() {

@@ -3,8 +3,9 @@ const routes = require('next-routes')();
 routes
   .add({ name: 'home_page', pattern: '/', page: 'index' })
   .add({ name: 'about', pattern: '/about', page: 'about/college' })
-  .add({ name: 'login', pattern: '/login', page: 'login' })
-  .add({ name: 'profile', pattern: '/profile', page: 'profile' })
+  .add({ name: 'login', pattern: '/login', page: 'user_pages/login' })
+  .add({ name: 'profile', pattern: '/profile', page: 'user_pages/profile' })
+  .add({ name: 'contact', pattern: '/contact', page: 'about/contact' })
   .add({
     name: 'administration',
     pattern: '/about/administration',

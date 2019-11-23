@@ -2,7 +2,7 @@
 import React from 'react';
 import Router from 'next/router'
 import fetch from 'isomorphic-unfetch';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Button, Form, FormGroup, FormFeedback, Label, Input } from 'reactstrap'
 
 import config from '../../../config.json';
@@ -95,13 +95,14 @@ class LoginForm extends React.Component {
         .then(response => response.json())
         .then(data => data.token)
         .then(token => {
-          localStorage.setItem('usertoken', token);
+          // localStorage.setItem('usertoken', token);
+          document.cookie = `usertoken=${token}`;
           console.log(`usertoken: ${token}`);
           Router.push('/profile');
         })
         .catch(err => console.error(err));
-    }    
-      
+    }
+
   }
   render() {
     return (
@@ -114,7 +115,7 @@ class LoginForm extends React.Component {
       // </form>
       <Container className="form-div">
         <Form onSubmit={(e) => this.submitForm(e)}>
-          <FormGroup class="form-group">
+          <FormGroup className="form-group">
             <Input
               type="email"
               name="email"

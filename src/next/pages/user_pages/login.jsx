@@ -1,10 +1,10 @@
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 
-import LoginPageContent from '../components/content/login_page';
-import MainLayout from '../components/derived/main_layout';
+import LoginPageContent from '../../components/content/user_pages/login';
+import MainLayout from '../../components/derived/main_layout';
 
-import config from '../config.json';
+import config from '../../config.json';
 
 class LoginPage extends React.Component {
   static async getInitialProps() {
