@@ -27,7 +27,8 @@ class Profile extends React.Component {
           id: 3
         }),
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'x-access-token': usertoken
         }
       }
     );

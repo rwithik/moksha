@@ -150,7 +150,7 @@ class LoginForm extends React.Component {
               value={this.state.formControl.email.value}
               valid={this.state.formControl.email.state === 'has-success'}
               invalid={this.state.formControl.email.state === 'has-danger'}
-              autocomplete="off"
+              autoComplete="off"
               onChange={ (e) => {
                             this.validateEmail(e)
                             this.handleChangeEmail(e)
@@ -158,7 +158,7 @@ class LoginForm extends React.Component {
               required
             />
             <Label for="email" className="form-label"><span className="content">Email</span></Label>
-            <div class="spacer"></div>
+            <div className="spacer"></div>
             <FormFeedback invalid className="form-feedback">
                 Please enter a valid email!
             </FormFeedback>
@@ -183,7 +183,7 @@ class LoginForm extends React.Component {
             </FormFeedback>
           </FormGroup>
           <FormGroup className="form-valid">
-            {this.state.formControl.invalid ? <div class="invalid-cred">Incorrect username or password!</div>:null}
+            {this.state.formControl.invalid ? <div className="invalid-cred">Incorrect username or password!</div>:null}
           </FormGroup>
           <FormGroup className="form-group form-button">
             <Button className="class-submit">Login</Button>
