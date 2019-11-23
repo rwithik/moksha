@@ -2,9 +2,12 @@ import React from 'react';
 import Router from 'next/router'
 import fetch from 'isomorphic-unfetch';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Card } from 'reactstrap'
+import { Table, TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col, Container } from 'reactstrap';
 
 import config from '../../../config.json';
+import './profile.css';
+
+
 
 class ProfileCard extends React.Component {
 
@@ -18,9 +21,20 @@ class ProfileCard extends React.Component {
         gender: '',
         nationality: '',
         date_of_birth: ''
+      },
+      tabControl: {
+        active: "1"
       }
     };
     console.log("constr: " + this.state)
+  }
+
+  changeTab(tab) {
+    const {tabControl} = this.state;
+    if (!(tab === tabControl.active)) {
+      tabControl.active = tab;
+    }
+    this.setState({tabControl});
   }
 
   componentDidMount() {
@@ -61,19 +75,79 @@ class ProfileCard extends React.Component {
 
   }
 
+
   render() {
 
     let {first_name, middle_name, last_name, gender, nationality, date_of_birth} = this.state.details;
 
     return (
-      <Container>
-        <Card style={cardStyle}>
-          Name: {first_name + middle_name + last_name}<br />
-          Gender: {gender === 'M' ? 'Male' : 'Female'}<br />
-          Nationality: {nationality}<br />
-          Date of Birth: {date_of_birth}<br />
-        </Card>
-      </Container>
+      // <Container>
+      //   {/* <Card style={cardStyle}>
+      //     Name: {first_name + middle_name + last_name}<br />
+      //     Gender: {gender === 'M' ? 'Male' : 'Female'}<br />
+      //     Nationality: {nationality}<br />
+      //     Date of Birth: {date_of_birth}<br />
+      //   </Card> */}
+      // </Container>
+      <div className="tab-container">
+        <Nav tabs>
+          <NavItem>
+            <NavLink
+              className={this.state.tabControl.active === "1" ? "active": null}
+              onClick={() => this.changeTab("1")}
+            >
+              Personal Info
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={this.state.tabControl.active === "2" ? "active": null}
+              onClick={() => this.changeTab("2")}
+            >
+              Course Info
+            </NavLink>
+          </NavItem>
+        </Nav>
+        <TabContent activeTab={this.state.tabControl.active}>
+          <TabPane tabId="1">
+            <Row>
+              <Col sm="12">
+                <h4>Basic Information</h4>
+                <Table>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Name:</th>
+                      <td>{first_name + middle_name + last_name}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Gender:</th>
+                      <td>{gender === 'M' ? 'Male' : 'Female'}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Nationality:</th>
+                      <td>{nationality}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Date of Birth:</th>
+                      <td>{date_of_birth}</td>
+                    </tr>
+                  </tbody>
+                </Table>
+                <h4>Course Summary</h4>
+              </Col>
+            </Row>
+          </TabPane>
+        </TabContent>
+        <TabContent activeTab={this.state.tabControl.active}>
+          <TabPane tabId="2">
+            <Row>
+              <Col sm="12">
+                <h4>Test</h4>
+              </Col>
+            </Row>
+          </TabPane>
+        </TabContent>
+      </div>
     );
   }
 }

@@ -4,6 +4,7 @@
 }
 
 .jsx-3908516781 {
+    /* background-image: linear-gradient(90deg, #26de81 0%,  #fff 36%, #fff 64%, #26de81 100%); */
     background-image: linear-gradient(141deg, #9fb8ad 0%,  #1fc8db 25%, #2c8de8);
 }
 
@@ -42,7 +43,7 @@
     left: 0px;
     width: 100%;
     height: 50px;
-    padding-top: 20px;
+    /* padding-top: 20px; */
     padding-left: 17px;
     border: 1px solid white!important;
 }
@@ -52,7 +53,7 @@
 .form-control.is-valid + .form-label .content {
     bottom: 10px;
     background-color: white;
-    font-size: 14px;
+    font-size: 12px;
     color: #2980b9 ;
 }
 
@@ -90,7 +91,7 @@
 .content {
     position: relative;
     color: #949494;
-    bottom: -20px;
+    bottom: -14px;
     background-color: transparent;
     padding: 5px;
     transition: all 0.3s ease;

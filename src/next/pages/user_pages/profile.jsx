@@ -3,7 +3,7 @@ import fetch from 'isomorphic-unfetch';
 
 import ProfilePageContent from '../../components/content/user_pages/profile';
 import MainLayout from '../../components/derived/main_layout';
-import cookies from 'next-cookies';
+// import cookies from 'next-cookies';
 import config from '../../config.json';
 
 class Profile extends React.Component {

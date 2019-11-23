@@ -2,10 +2,14 @@ import React from 'react';
 import Router from 'next/router'
 import fetch from 'isomorphic-unfetch';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Button, Form, FormGroup, FormFeedback, Label, Input } from 'reactstrap'
+import { Container, Button, Form, FormGroup, FormFeedback, Label, Input } from 'reactstrap';
+import { Loader } from 'react-overlay-loader';
+
 
 import config from '../../../config.json';
-import './form.css'
+import './form.css';
+import 'react-overlay-loader/styles.css';
+
 
 class LoginForm extends React.Component {
   constructor() {
@@ -22,7 +26,8 @@ class LoginForm extends React.Component {
           state: '',
           error: ''
         },
-        invalid: false
+        invalid: false,
+        loading: false
       }
     };
   }
@@ -81,10 +86,13 @@ class LoginForm extends React.Component {
     e.preventDefault();
     const { email } = this.state.formControl;
     const { password } = this.state.formControl;
+    const { formControl } = this.state;
     const details = {
         email: email.val,
         password: password.val
       }
+    formControl.loading = true;
+    this.setState({formControl});
     if(email.state === 'has-success' && password.state === 'has-success'){
         fetch(config.apiLocation + '/authentication/login/karma', {
         method: 'POST',
@@ -112,6 +120,7 @@ class LoginForm extends React.Component {
         .catch(err => {
           const { formControl } = this.state;
           formControl.invalid = true;
+          formControl.loading = false;
           this.setState({
             formControl: formControl
           })
@@ -136,7 +145,7 @@ class LoginForm extends React.Component {
               value={this.state.formControl.email.value}
               valid={this.state.formControl.email.state === 'has-success'}
               invalid={this.state.formControl.email.state === 'has-danger'}
-              autoComplete="off"
+              // autoComplete="off"
               onChange={ (e) => {
                             this.validateEmail(e)
                             this.handleChangeEmail(e)
@@ -171,6 +180,7 @@ class LoginForm extends React.Component {
           <FormGroup className="form-valid">
             {this.state.formControl.invalid ? <div className="invalid-cred">Incorrect username or password!</div>:null}
           </FormGroup>
+          <Loader fullpage loading={this.state.formControl.loading} />
           <FormGroup className="form-group form-button">
             <Button className="class-submit">Login</Button>
           </FormGroup>

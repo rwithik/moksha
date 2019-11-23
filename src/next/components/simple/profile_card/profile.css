@@ -1,0 +1,27 @@
+.jsx-3908516781 {
+    /* background-image: linear-gradient(90deg, #26de81 0%,  #fff 36%, #fff 64%, #26de81 100%); */
+    background-image: linear-gradient(141deg, #9fb8ad 0%,  #1fc8db 25%, #2c8de8);
+}
+
+.tab-container {
+    position: relative;
+    margin: 20px 30px 20px 15px;
+    padding: 30px 30px;
+    background-color: white;
+    border-radius: 5px;
+    vertical-align: middle;
+    height: 100vh;
+}
+
+th {
+    font-weight: 500;
+}
+
+td {
+    font-weight: 200;
+}
+
+h4 {
+    margin-bottom: 1em;
+    margin-top: 2em;
+}
