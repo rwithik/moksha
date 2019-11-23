@@ -22,7 +22,8 @@ class LoginForm extends React.Component {
           val: '',
           state: '',
           error: ''
-        }
+        },
+        invalid: false
       }
     };
   }
@@ -61,6 +62,10 @@ class LoginForm extends React.Component {
     const { formControl } = this.state
     const value = target.type === 'checkbox' ? target.checked : target.value;
     formControl.email.val = value;
+    formControl.invalid = false;
+    await this.setState({
+      formControl
+    });
     }
 
   handleChangePassword = async (event) => {
@@ -68,6 +73,7 @@ class LoginForm extends React.Component {
     const { formControl } = this.state
     const value = target.type === 'checkbox' ? target.checked : target.value;
     formControl.password.val = value;
+    formControl.invalid = false;
     await this.setState({
       formControl
     });
@@ -93,14 +99,31 @@ class LoginForm extends React.Component {
         // .then(response => response.text())
         // .then(text => console.log(text))
         .then(response => response.json())
-        .then(data => data.token)
+        .then(data => {
+          if(data.token){
+            return data.token
+          }
+          else {
+            throw Error(data.error);
+          }})
         .then(token => {
           // localStorage.setItem('usertoken', token);
           document.cookie = `usertoken=${token}`;
           console.log(`usertoken: ${token}`);
-          Router.push('/profile');
+          if (token) {
+            Router.push('/profile');
+          }
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+          // this.state.invalid = true;
+          // this.setState(this.state);
+          const { formControl } = this.state;
+          formControl.invalid = true;
+          this.setState({
+            formControl: formControl
+          })
+          console.log(this.state);
+        });
     }
 
   }
@@ -113,8 +136,12 @@ class LoginForm extends React.Component {
       //   {(this.state.formControl.password.error) ? <span className="invalid-feedback"> + this.state.formControl.password.error </span> : ''}
       //   <button onClick={this.submitHandler}>Submit</button>
       // </form>
+      <div className="form-body">
       <Container className="form-div">
         <Form onSubmit={(e) => this.submitForm(e)}>
+          <FormGroup>
+            <div className="form-header">Sign In</div>
+          </FormGroup>
           <FormGroup className="form-group">
             <Input
               type="email"
@@ -123,6 +150,7 @@ class LoginForm extends React.Component {
               value={this.state.formControl.email.value}
               valid={this.state.formControl.email.state === 'has-success'}
               invalid={this.state.formControl.email.state === 'has-danger'}
+              autocomplete="off"
               onChange={ (e) => {
                             this.validateEmail(e)
                             this.handleChangeEmail(e)
@@ -130,8 +158,9 @@ class LoginForm extends React.Component {
               required
             />
             <Label for="email" className="form-label"><span className="content">Email</span></Label>
-            <FormFeedback invalid>
-                Please enter a valid email.
+            <div class="spacer"></div>
+            <FormFeedback invalid className="form-feedback">
+                Please enter a valid email!
             </FormFeedback>
           </FormGroup>
           <FormGroup className="form-group">
@@ -149,15 +178,19 @@ class LoginForm extends React.Component {
               required
             />
             <Label for="password" className="form-label"><span className="content">Password</span></Label>
-            <FormFeedback invalid>
-                Please enter a valid password.
+            <FormFeedback invalid className="form-feedback">
+                Please enter a valid password!
             </FormFeedback>
           </FormGroup>
-          <FormGroup>
-            <Button className="class-submit">Submit</Button>
+          <FormGroup className="form-valid">
+            {this.state.formControl.invalid ? <div class="invalid-cred">Incorrect username or password!</div>:null}
+          </FormGroup>
+          <FormGroup className="form-group form-button">
+            <Button className="class-submit">Login</Button>
           </FormGroup>
         </Form>
       </Container>
+      </div>
     );
   }
 }
