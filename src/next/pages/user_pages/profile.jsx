@@ -19,22 +19,8 @@ class Profile extends React.Component {
     data['menu'] = await res.json()
 
     // const usertoken = localStorage.getItem('usertoken');
-    const usertoken = cookies(ctx).usertoken;
-    console.log(`The fuking token: ${usertoken}`)
-    let response = await fetch(config.apiLocation + '/private/people/people/details', {
-        method: 'POST',
-        body: JSON.stringify({
-          id: 3
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-          'x-access-token': usertoken
-        }
-      }
-    );
-    response = await response.json();
-    console.log(response);
-    data['details'] = response;
+    // const usertoken = cookies(ctx).usertoken;
+    // console.log(`The fuking token: ${usertoken}`)
 
     return {
       mainLayout: {
@@ -47,14 +33,13 @@ class Profile extends React.Component {
           }
         }
       },
-      details: data.details
     }
   }
 
   render() {
     return(
       <MainLayout mainLayout={this.props.mainLayout}>
-        <ProfilePageContent details={this.props.details}/>
+        <ProfilePageContent />
       </MainLayout>
     )
   }

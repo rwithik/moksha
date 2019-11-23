@@ -1,4 +1,3 @@
-// Render Prop
 import React from 'react';
 import Router from 'next/router'
 import fetch from 'isomorphic-unfetch';
@@ -82,12 +81,10 @@ class LoginForm extends React.Component {
     e.preventDefault();
     const { email } = this.state.formControl;
     const { password } = this.state.formControl;
-    // console.dir(this.state.formControl);
     const details = {
         email: email.val,
         password: password.val
       }
-      // console.log(details);
     if(email.state === 'has-success' && password.state === 'has-success'){
         fetch(config.apiLocation + '/authentication/login/karma', {
         method: 'POST',
@@ -96,8 +93,6 @@ class LoginForm extends React.Component {
           'Content-Type': 'application/json'
         }
       })
-        // .then(response => response.text())
-        // .then(text => console.log(text))
         .then(response => response.json())
         .then(data => {
           if(data.token){
@@ -107,7 +102,7 @@ class LoginForm extends React.Component {
             throw Error(data.error);
           }})
         .then(token => {
-          // localStorage.setItem('usertoken', token);
+          localStorage.setItem('usertoken', token);
           document.cookie = `usertoken=${token}`;
           console.log(`usertoken: ${token}`);
           if (token) {
@@ -115,8 +110,6 @@ class LoginForm extends React.Component {
           }
         })
         .catch(err => {
-          // this.state.invalid = true;
-          // this.setState(this.state);
           const { formControl } = this.state;
           formControl.invalid = true;
           this.setState({
@@ -129,13 +122,6 @@ class LoginForm extends React.Component {
   }
   render() {
     return (
-      // <form>
-      //   <input type="email" name="email" value={this.state.formControl.email.value} onChange={this.changeHandler} />
-      //   {(this.state.formControl.email.error) ? <span className="invalid-feedback"> + this.state.formControl.email.error </span> : ''}
-      //   <input type="password" name="password" value={this.state.formControl.password.value} onChange={this.changeHandler} />
-      //   {(this.state.formControl.password.error) ? <span className="invalid-feedback"> + this.state.formControl.password.error </span> : ''}
-      //   <button onClick={this.submitHandler}>Submit</button>
-      // </form>
       <div className="form-body">
       <Container className="form-div">
         <Form onSubmit={(e) => this.submitForm(e)}>

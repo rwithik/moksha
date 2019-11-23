@@ -7,10 +7,63 @@ import { Container, Card } from 'reactstrap'
 import config from '../../../config.json';
 
 class ProfileCard extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      details: {
+        first_name: '',
+        middle_name: '',
+        last_name: '',
+        gender: '',
+        nationality: '',
+        date_of_birth: ''
+      }
+    };
+    console.log("constr: " + this.state)
+  }
+
+  componentDidMount() {
+    const usertoken = localStorage.getItem('usertoken');
+    console.log("Profilecard - usertoken: " + usertoken);
+    let response = fetch(config.apiLocation + '/private/people/people/details', {
+        method: 'POST',
+        body: JSON.stringify({
+          id: 3
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': usertoken
+        }
+      }
+    )
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        let { details } =  this.state;
+        let { first_name, middle_name, last_name, gender, nationality, date_of_birth } = data.classes;
+        details = {
+          first_name,
+          middle_name,
+          last_name,
+          date_of_birth,
+          gender,
+          nationality
+        };
+        this.setState({
+          details
+        });
+      })
+      .catch(err => {
+        console.error("Error in ProfileCard: " + err);
+      })
+      ;
+
+  }
+
   render() {
 
-    let {first_name, middle_name, last_name, gender, nationality, date_of_birth} = this.props.details.classes;
-    // console.log(`details: ${}`);
+    let {first_name, middle_name, last_name, gender, nationality, date_of_birth} = this.state.details;
 
     return (
       <Container>

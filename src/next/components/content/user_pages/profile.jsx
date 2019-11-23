@@ -7,7 +7,7 @@ class ProfilePageContent extends React.Component {
   render(props) {
     return (
       <div id="profile-page-content">
-        <ProfileCard details={this.props.details} />
+        <ProfileCard />
       </div>
     )
   }
