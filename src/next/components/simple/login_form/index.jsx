@@ -56,6 +56,7 @@ class LoginForm extends React.Component {
       }
       this.setState({ formControl })
     }
+
   handleChangeEmail = async (event) => {
     const { target } = event;
     const { formControl } = this.state
@@ -77,6 +78,7 @@ class LoginForm extends React.Component {
       formControl
     });
   }
+
   submitForm(e) {
     e.preventDefault();
     const { email } = this.state.formControl;
@@ -103,7 +105,7 @@ class LoginForm extends React.Component {
           }})
         .then(token => {
           localStorage.setItem('usertoken', token);
-          document.cookie = `usertoken=${token}`;
+          // document.cookie = `usertoken=${token}`;
           console.log(`usertoken: ${token}`);
           if (token) {
             Router.push('/profile');

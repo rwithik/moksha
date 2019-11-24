@@ -2,7 +2,9 @@ import React from 'react';
 import fetch from 'isomorphic-unfetch';
 
 import ProfilePageContent from '../../components/content/user_pages/profile';
+import AttendanceContent from '../../components/content/user_pages/attendance';
 import MainLayout from '../../components/derived/main_layout';
+// import Sidebar from '../../components/simple/sidebar';
 import cookies from 'next-cookies';
 import config from '../../config.json';
 
@@ -40,6 +42,7 @@ class Profile extends React.Component {
     return(
       <MainLayout mainLayout={this.props.mainLayout}>
         <ProfilePageContent />
+        <AttendanceContent />
       </MainLayout>
     )
   }
