@@ -4,8 +4,6 @@ import fetch from 'isomorphic-unfetch';
 import ProfilePageContent from '../../components/content/user_pages/profile';
 import AttendanceContent from '../../components/content/user_pages/attendance';
 import MainLayout from '../../components/derived/main_layout';
-// import Sidebar from '../../components/simple/sidebar';
-import cookies from 'next-cookies';
 import config from '../../config.json';
 
 class Profile extends React.Component {
@@ -19,10 +17,6 @@ class Profile extends React.Component {
 
     res = await fetch(config.apiLocation + '/public/menu/' + config.slug + '/1')
     data['menu'] = await res.json()
-
-    // const usertoken = localStorage.getItem('usertoken');
-    // const usertoken = cookies(ctx).usertoken;
-    // console.log(`The fuking token: ${usertoken}`)
 
     return {
       mainLayout: {
