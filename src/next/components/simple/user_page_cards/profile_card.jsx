@@ -83,7 +83,7 @@ class ProfileCard extends React.Component {
                   <tbody>
                     <tr>
                       <th scope="row">Name:</th>
-                      <td>{first_name + middle_name + last_name}</td>
+                      <td>{first_name + " "+ middle_name + " " + last_name}</td>
                     </tr>
                     <tr>
                       <th scope="row">Gender:</th>
