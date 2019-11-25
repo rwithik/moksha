@@ -18,6 +18,9 @@ class MainContainer extends React.Component {
               font-family: 'Open Sans', sans-serif;
               font-weight: 300;
               color: #5d5d5d;
+              background-image: linear-gradient(141deg, #9fb8ad 0%,  #1fc8db 25%, #2c8de8);
+              background-repeat: no-repeat;
+              background-size: auto;
               overflow-x : hidden;
             }
 

@@ -14,27 +14,15 @@ class ProfileCard extends React.Component {
   constructor() {
     super();
     this.state = {
-      details: {
+    details: {
         first_name: '',
         middle_name: '',
         last_name: '',
         gender: '',
         nationality: '',
         date_of_birth: ''
-      },
-      tabControl: {
-        active: "1"
       }
     };
-    console.log("constr: " + this.state)
-  }
-
-  changeTab(tab) {
-    const {tabControl} = this.state;
-    if (!(tab === tabControl.active)) {
-      tabControl.active = tab;
-    }
-    this.setState({tabControl});
   }
 
   componentDidMount() {
@@ -90,26 +78,7 @@ class ProfileCard extends React.Component {
       //   </Card> */}
       // </Container>
       <div className="tab-container">
-        <Nav tabs>
-          <NavItem>
-            <NavLink
-              className={this.state.tabControl.active === "1" ? "active": null}
-              onClick={() => this.changeTab("1")}
-            >
-              Personal Info
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={this.state.tabControl.active === "2" ? "active": null}
-              onClick={() => this.changeTab("2")}
-            >
-              Course Info
-            </NavLink>
-          </NavItem>
-        </Nav>
-        <TabContent activeTab={this.state.tabControl.active}>
-          <TabPane tabId="1">
+
             <Row>
               <Col sm="12">
                 <h4>Basic Information</h4>
@@ -136,25 +105,11 @@ class ProfileCard extends React.Component {
                 <h4>Course Summary</h4>
               </Col>
             </Row>
-          </TabPane>
-        </TabContent>
-        <TabContent activeTab={this.state.tabControl.active}>
-          <TabPane tabId="2">
-            <Row>
-              <Col sm="12">
-                <h4>Test</h4>
-              </Col>
-            </Row>
-          </TabPane>
-        </TabContent>
+          
       </div>
     );
   }
 }
 
-const cardStyle = {
-  width: '70%',
-  padding: '20px',
-}
 
 export default ProfileCard;
