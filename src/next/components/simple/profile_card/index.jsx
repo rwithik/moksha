@@ -40,9 +40,6 @@ class ProfileCard extends React.Component {
     const usertoken = localStorage.getItem('usertoken');
     let response = fetch(config.apiLocation + '/private/people/people/details', {
         method: 'POST',
-        body: JSON.stringify({
-          id: 3
-        }),
         headers: {
           'Content-Type': 'application/json',
           'x-access-token': usertoken
@@ -51,7 +48,6 @@ class ProfileCard extends React.Component {
     )
       .then(res => res.json())
       .then(data => {
-        // console.log(data);
         let { details } =  this.state;
         let { id, first_name, middle_name, last_name, gender, nationality, date_of_birth } = data.classes;
         details = {

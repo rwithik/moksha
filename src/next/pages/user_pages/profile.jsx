@@ -36,6 +36,7 @@ class Profile extends React.Component {
     return(
       <MainLayout mainLayout={this.props.mainLayout}>
         <ProfilePageContent />
+        <ProfilePageContent />
         <AttendanceContent />
       </MainLayout>
     )

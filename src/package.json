@@ -35,7 +35,7 @@
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.15",
     "react-dom": "^16.12.0",
-    "react-sidenav": "^4.0.6"
+    "react-sidenav": "^4.0.6",
     "react-overlay-loader": "0.0.3"
   },
   "devDependencies": {
