@@ -54,7 +54,7 @@ constructor() {
             <NavLink
               className={this.state.tabControl.active === "3" ? "active": null}
               onClick={() => this.changeTab("3")}
-              style={this.state.tabControl.active === "3" ? tabStyle: null}
+              style={this.state.tabControl.active === "3" ? tabStyleActive: null}
             >
               Attendance
             </NavLink>
