@@ -11,6 +11,10 @@ class MainContainer extends React.Component {
             @import url('https://fonts.googleapis.com/css?family=Open+Sans:400');
             @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
             @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+            
+            html, body {
+              height: 100vh;
+            }
 
             body {
               margin: 0;
@@ -19,9 +23,10 @@ class MainContainer extends React.Component {
               font-weight: 300;
               color: #5d5d5d;
               background-image: linear-gradient(141deg, #9fb8ad 0%,  #1fc8db 25%, #2c8de8);
-              background-repeat: no-repeat;
-              background-size: auto;
+              background-repeat: no-repeat;   
+              background-size: cover;
               overflow-x : hidden;
+              background-position: center;
             }
 
             ::-moz-selection { /* Code for Firefox */

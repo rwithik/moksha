@@ -36,7 +36,7 @@ constructor() {
             <NavLink
               className={this.state.tabControl.active === "1" ? "active": null}
               onClick={() => this.changeTab("1")}
-              style={this.state.tabControl.active === "1" ? tabStyle: null}
+              style={this.state.tabControl.active === "1" ? tabStyleActive: tabStyleInactive}
             >
               Personal Info
             </NavLink>
@@ -45,7 +45,7 @@ constructor() {
             <NavLink
               className={this.state.tabControl.active === "2" ? "active": null}
               onClick={() => this.changeTab("2")}
-              style={this.state.tabControl.active === "2" ? tabStyle: null}
+              style={this.state.tabControl.active === "2" ? tabStyleActive: tabStyleInactive}
             >
               Course Info
             </NavLink>
@@ -54,7 +54,7 @@ constructor() {
             <NavLink
               className={this.state.tabControl.active === "3" ? "active": null}
               onClick={() => this.changeTab("3")}
-              style={this.state.tabControl.active === "3" ? tabStyle: null}
+              style={this.state.tabControl.active === "3" ? tabStyleActive: null}
             >
               Attendance
             </NavLink>
@@ -81,9 +81,18 @@ constructor() {
   }
 
 }
-const tabStyle = {
+const tabStyleActive = {
   backgroundColor: '#45aaf2',
   color: '#fff'
+}
+
+const tabStyleInactive = {
+  
+}
+
+const navItem = {
+  // borderColor: '#000' 
+  borderBottom: '100px'
 }
 
 export default ProfilePageContent;
