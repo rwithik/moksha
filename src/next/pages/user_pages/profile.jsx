@@ -2,7 +2,6 @@ import React from 'react';
 import fetch from 'isomorphic-unfetch';
 
 import ProfilePageContent from '../../components/content/user_pages/profile';
-import AttendanceContent from '../../components/content/user_pages/attendance';
 import MainLayout from '../../components/derived/main_layout';
 import config from '../../config.json';
 

@@ -1,11 +1,13 @@
 import React from 'react';
 import config from '../../../config.json';
-import ProfileCard from '../../simple/user_page_cards/profile_card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Table, TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col, Container } from 'reactstrap';
 
-import './profile-page.css';
+import ProfileCard from '../../simple/user_page_cards/profile_card';
 import CourseInfoCard from '../../simple/user_page_cards/course_card';
+import AttendanceCard from '../../simple/user_page_cards/attendance_card';
+
+import './profile-page.css';
 
 class ProfilePageContent extends React.Component {
 constructor() {
@@ -48,6 +50,15 @@ constructor() {
               Course Info
             </NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink
+              className={this.state.tabControl.active === "3" ? "active": null}
+              onClick={() => this.changeTab("3")}
+              style={this.state.tabControl.active === "3" ? tabStyle: null}
+            >
+              Attendance
+            </NavLink>
+          </NavItem>
         </Nav>
         <TabContent activeTab={this.state.tabControl.active}>
           <TabPane tabId="1">
@@ -57,6 +68,11 @@ constructor() {
         <TabContent activeTab={this.state.tabControl.active}>
           <TabPane tabId="2">
             <CourseInfoCard />
+          </TabPane>
+        </TabContent>
+        <TabContent activeTab={this.state.tabControl.active}>
+          <TabPane tabId="3">
+            <AttendanceCard />
           </TabPane>
         </TabContent>
       {/* </div> */}
