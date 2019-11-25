@@ -14,7 +14,7 @@ constructor() {
     super();
     this.state = {
       tabControl: {
-        active: "1"
+        active: "2"
       }
     };
     console.log("constr: " + this.state)

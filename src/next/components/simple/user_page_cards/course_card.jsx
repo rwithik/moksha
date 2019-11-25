@@ -21,7 +21,7 @@ class CourseInfoCard extends React.Component {
     const usertoken = localStorage.getItem('usertoken');
 
     fetch(config.apiLocation + '/private/student/student_class_enrollment_activity', {
-        method: 'POST',
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           'x-access-token': usertoken
@@ -30,15 +30,31 @@ class CourseInfoCard extends React.Component {
     )
       .then(response => response.json())
       .then(data => {
-        data.map(course => course.course_id);
-        console.log(data);
-        
+        let course_ids = data.courses.map(course => course.course_id);
+        this.setState({
+          courses: course_ids
+        })
       })
       .catch(err => console.log("Error in CourseCard: " + err));
+  }
 
+  makeTable() {
+    const courses = this.state.courses;
+    return courses.map(course => {
+      return (
+        <tr>
+          <td>{course}</td>
+          <td>Course Name</td>
+          <td>Faculty</td>
+        </tr>
+      )
+    });
   }
 
   render() {
+
+
+
     return (
       <div className="tab-container">
             <Row>
@@ -51,18 +67,7 @@ class CourseInfoCard extends React.Component {
                           <th>Course Name</th>
                           <th>Faculty</th>
                         </tr>
-                        <tr>
-                          <td>{}</td>
-                        </tr>
-                        <tr>
-                          <td>{}</td>
-                        </tr>
-                        <tr>
-                          <td>{}</td>
-                        </tr>
-                        <tr>
-                          <td>{}</td>
-                        </tr>
+                          {this.makeTable()}
                       </tbody>
                     </Table>
                 </Col>
