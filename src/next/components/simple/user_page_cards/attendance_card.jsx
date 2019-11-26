@@ -41,8 +41,6 @@ class AttendanceCard extends React.Component {
           gender,
           nationality
         };
-        // TODO: Change this, probably. ! important
-        localStorage.setItem('userid', id);
         this.setState({
           details
         });

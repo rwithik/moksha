@@ -30,10 +30,11 @@ class CourseInfoCard extends React.Component {
     )
       .then(response => response.json())
       .then(data => {
-        let course_ids = data.courses.map(course => course.course_id);
+        // FIXME: Why is this returning an array.
+        let courses = data.courses[0];
         this.setState({
-          courses: course_ids
-        })
+          courses
+        });
       })
       .catch(err => console.log("Error in CourseCard: " + err));
   }
@@ -43,9 +44,9 @@ class CourseInfoCard extends React.Component {
     return courses.map(course => {
       return (
         <tr>
-          <td>{course}</td>
-          <td>Course Name</td>
-          <td>Faculty</td>
+          <td>{course.official_course_id}</td>
+          <td>{course.name}</td>
+          <td>{course.credits}</td>
         </tr>
       )
     });
@@ -65,7 +66,7 @@ class CourseInfoCard extends React.Component {
                         <tr>
                           <th>Course Code</th>
                           <th>Course Name</th>
-                          <th>Faculty</th>
+                          <th>Credits</th>
                         </tr>
                           {this.makeTable()}
                       </tbody>
