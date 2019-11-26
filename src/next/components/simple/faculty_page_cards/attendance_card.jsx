@@ -6,95 +6,79 @@ import { Table, TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTi
 
 import config from '../../../config.json';
 import './profile.css';
-
-
-
+import DropdownButton from '../dropdown';
 class FacultyAttendanceCard extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      details: []
+      attendance: [],
+      course: '',
+      courseList: []
     };
-    console.log("constr: " + this.state)
   }
 
   componentDidMount() {
     const usertoken = localStorage.getItem('usertoken');
-    let response = fetch(config.apiLocation + '/private/student/student_attendance_data/student', {
-        method: 'POST',
+
+    fetch(config.apiLocation + '/private/faculty/faculty_academic_enrolment_activity', {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           'x-access-token': usertoken
         }
       }
     )
-      .then(res => res.json())
+      .then(response => response.json())
       .then(data => {
-        let { details } =  this.state;
-        let { id, first_name, middle_name, last_name, gender, nationality, date_of_birth } = data.classes;
-        details = {
-          first_name,
-          middle_name,
-          last_name,
-          date_of_birth,
-          gender,
-          nationality
-        };
-        // TODO: Change this, probably. ! important
-        localStorage.setItem('userid', id);
+        let { classes } = data;
         this.setState({
-          details
+          courseList: classes
         });
       })
-      .catch(err => {
-        console.error("Error in ProfileCard: " + err);
-      })
-      ;
+      .catch(err => console.error(err));
 
   }
 
-  getKeys() {
-    return Object.keys(testData[0]);
-  }
-
+  // getKeys() {
+  //   return Object.keys(testData[0]);
+  // }
+  //
   getHeader() {
-    var keys = this.getKeys();
-    return keys.map((key, index) => <th key={key}>{key}</th>)
+    return ['Course Code', 'Course Name', 'Faculty', 'Attendance'].map((key, index) => <th key={key}>{key}</th>)
   }
 
-  // getRowData(row, i) {
-  //   var keys = this.getKeys();
-  //   return keys.map((key, index) => <td key={i}></td>)
+  // getRowsData = function(){
+  //   var items = this.state.details;
+  //   // var keys = this.getKeys();
+  //   return items.map((row, index) => {
+  //     return (
+  //           <tr>
+  //             <td>{row.official_course_id}</td>
+  //             <td>{row.name}</td>
+  //             <td>{row.first_name + ' ' + row.last_name}</td>
+  //             <td>{(row.value*100/row.max_value).toFixed(2)}%</td>
+  //           </tr>)
+  //   })
   // }
 
-  getRowsData = function(){
-    var items = testData;
-    var keys = this.getKeys();
-    return items.map((row, index)=>{
-      return (
-            <tr>
-              <td>{row['Course Code']}</td>
-              <td>{row['Course Name']}</td>
-              <td>{row['Faculty']}</td>
-              <td>{row['Attendance']}</td>
-            </tr>)
-    })
+  onchangeHandler = (e) => {
+    const { value } = e.target;
+    alert('Loading!');
+    console.log(value);
   }
-
 
   render() {
     return (
       <div className="tab-container">
             <Row>
                 <Col sm="12">
-                    <h4>Attendance Details</h4>
+                    <h4>Attendance Class Details</h4>
+                    <DropdownButton header="Courses" items={['TEST123']}/>
                     <Table>
                       <tbody>
                         <tr>
-                          {this.getHeader()};
                         </tr>
-                        {this.getRowsData()}
                       </tbody>
                     </Table>
                 </Col>
@@ -103,24 +87,5 @@ class FacultyAttendanceCard extends React.Component {
     );
   }
 }
-
-const testData = [{
-  'Course Code': 'CS203',
-  'Course Name': 'ABCD',
-  Faculty: 'Prof, ABC',
-  Attendance: '70'
-},
-{
-  'Course Code': 'CS201',
-  'Course Name': 'BCDE',
-  Faculty: 'Prof, ABC',
-  Attendance: '75'
-},
-{
-  'Course Code': 'CS200',
-  'Course Name': 'DEFG',
-  Faculty: 'Prof, ABC',
-  Attendance: '100'
-}]
 
 export default FacultyAttendanceCard;

@@ -1,13 +1,12 @@
 import React from 'react';
 import config from '../../../config.json';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Table, TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col, Container } from 'reactstrap';
+import { Table, TabContent, TabPane, Nav, NavItem, NavLink, Card,
+  Button, CardTitle, CardText, Row, Col, Container } from 'reactstrap';
 
 import ProfileCard from '../../simple/user_page_cards/profile_card';
 import CourseInfoCard from '../../simple/user_page_cards/course_card';
 import AttendanceCard from '../../simple/user_page_cards/attendance_card';
-
-
 import FacultyCourseInfoCard from '../../simple/faculty_page_cards/course_card';
 import FacultyAttendanceCard from '../../simple/faculty_page_cards/attendance_card';
 
@@ -21,7 +20,6 @@ constructor() {
         active: "3"
       }
     };
-    console.log("constr: " + this.state)
   }
 
   componentDidMount() {
@@ -46,9 +44,9 @@ constructor() {
         else {
           userType = 'faculty';
         }
-        this.setState({userType});
+        this.setState({...this.state, userType});
       })
-      .catch(err => console.log("Error in CourseCard: " + err));
+      .catch(err => console.error(err));
   }
 
   changeTab(tab) {
@@ -98,12 +96,12 @@ constructor() {
         </TabContent>
         <TabContent activeTab={this.state.tabControl.active}>
           <TabPane tabId="2">
-            {this.state.userType === 'student' ? <CourseInfoCard /> : <FacultyCourseInfoCard />}
+            {this.state.userType === 'student' ? <CourseInfoCard /> : this.state.userType === 'faculty' ? <FacultyCourseInfoCard />: ''}
           </TabPane>
         </TabContent>
         <TabContent activeTab={this.state.tabControl.active}>
           <TabPane tabId="3">
-            {this.state.userType === 'student' ? <AttendanceCard /> : <FacultyAttendanceCard />}
+            {this.state.userType === 'student' ? <AttendanceCard /> : this.state.userType === 'faculty' ? <FacultyAttendanceCard />: ''}
           </TabPane>
         </TabContent>
       {/* </div> */}
@@ -124,6 +122,10 @@ const tabStyleInactive = {
 const navItem = {
   // borderColor: '#000'
   borderBottom: '100px'
+}
+
+const hideTab = {
+  display: 'none'
 }
 
 export default ProfilePageContent;

@@ -30,9 +30,20 @@ class FacultyCourseInfoCard extends React.Component {
     )
       .then(response => response.json())
       .then(data => {
-        let course_ids = data.courses.map(course => course.course_id);
+        let courses = [
+          {
+            official_course_id: 'TEST123',
+            name: 'Test Course 1',
+            credits: 4
+          },
+          {
+            official_course_id: 'TEST321',
+            name: 'Test 2',
+            credits: 4
+          }
+        ];
         this.setState({
-          courses: course_ids
+          courses: courses
         })
       })
       .catch(err => console.log("Error in CourseCard: " + err));
@@ -43,9 +54,9 @@ class FacultyCourseInfoCard extends React.Component {
     return courses.map(course => {
       return (
         <tr>
-          <td>{course}</td>
-          <td>Course Name</td>
-          <td>Faculty</td>
+          <td>{course.official_course_id}</td>
+          <td>{course.name}</td>
+          <td>{course.credits}</td>
         </tr>
       )
     });
@@ -59,13 +70,13 @@ class FacultyCourseInfoCard extends React.Component {
       <div className="tab-container">
             <Row>
                 <Col sm="12">
-                    <h4>Courses Enrolled</h4>
+                    <h4>Courses Currently Teaching</h4>
                     <Table>
                       <tbody>
                         <tr>
                           <th>Course Code</th>
                           <th>Course Name</th>
-                          <th>Faculty</th>
+                          <th>Credits</th>
                         </tr>
                           {this.makeTable()}
                       </tbody>

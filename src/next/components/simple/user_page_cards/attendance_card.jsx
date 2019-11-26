@@ -42,9 +42,9 @@ class AttendanceCard extends React.Component {
 
   }
 
-  getKeys() {
-    return Object.keys(testData[0]);
-  }
+  // getKeys() {
+  //   return Object.keys(testData[0]);
+  // }
 
   getHeader() {
     return ['Course Code', 'Course Name', 'Faculty', 'Attendance'].map((key, index) => <th key={key}>{key}</th>)
@@ -52,7 +52,7 @@ class AttendanceCard extends React.Component {
 
   getRowsData = function(){
     var items = this.state.details;
-    var keys = this.getKeys();
+    // var keys = this.getKeys();
     return items.map((row, index) => {
       return (
             <tr>
@@ -85,24 +85,5 @@ class AttendanceCard extends React.Component {
     );
   }
 }
-
-const testData = [{
-  'Course Code': 'CS203',
-  'Course Name': 'ABCD',
-  Faculty: 'Prof, ABC',
-  Attendance: '70'
-},
-{
-  'Course Code': 'CS201',
-  'Course Name': 'BCDE',
-  Faculty: 'Prof, ABC',
-  Attendance: '75'
-},
-{
-  'Course Code': 'CS200',
-  'Course Name': 'DEFG',
-  Faculty: 'Prof, ABC',
-  Attendance: '100'
-}]
 
 export default AttendanceCard;
