@@ -1,0 +1,26 @@
+.tab-container {
+    position: relative;
+    margin: 20px 30px 20px 15px;
+    padding: 30px 30px;
+    background-color: white;
+    border-radius: 5px;
+    vertical-align: middle;
+    height: 100vh;
+}
+
+th {
+    font-weight: 500;
+}
+
+td {
+    font-weight: 200;
+}
+
+h4 {
+    margin-bottom: 1em;
+    margin-top: 2em;
+}
+
+.nav-link:hover {
+    cursor: pointer;
+}

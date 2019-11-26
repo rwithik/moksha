@@ -7,6 +7,10 @@ import ProfileCard from '../../simple/user_page_cards/profile_card';
 import CourseInfoCard from '../../simple/user_page_cards/course_card';
 import AttendanceCard from '../../simple/user_page_cards/attendance_card';
 
+
+import FacultyCourseInfoCard from '../../simple/faculty_page_cards/course_card';
+import FacultyAttendanceCard from '../../simple/faculty_page_cards/attendance_card';
+
 import './profile-page.css';
 
 class ProfilePageContent extends React.Component {
@@ -18,6 +22,33 @@ constructor() {
       }
     };
     console.log("constr: " + this.state)
+  }
+
+  componentDidMount() {
+
+    const usertoken = localStorage.getItem('usertoken');
+
+    fetch(config.apiLocation + '/private/faculty/faculty_academic_enrolment_activity', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': usertoken
+        }
+      }
+    )
+      .then(response => response.json())
+      .then(data => {
+        let { classes } = data;
+        let { userType } = this.state;
+        if (classes.length == 0) {
+          userType = 'student';
+        }
+        else {
+          userType = 'faculty';
+        }
+        this.setState({userType});
+      })
+      .catch(err => console.log("Error in CourseCard: " + err));
   }
 
   changeTab(tab) {
@@ -67,12 +98,12 @@ constructor() {
         </TabContent>
         <TabContent activeTab={this.state.tabControl.active}>
           <TabPane tabId="2">
-            <CourseInfoCard />
+            {this.state.userType === 'student' ? <CourseInfoCard /> : <FacultyCourseInfoCard />}
           </TabPane>
         </TabContent>
         <TabContent activeTab={this.state.tabControl.active}>
           <TabPane tabId="3">
-            <AttendanceCard />
+            {this.state.userType === 'student' ? <AttendanceCard /> : <FacultyAttendanceCard />}
           </TabPane>
         </TabContent>
       {/* </div> */}

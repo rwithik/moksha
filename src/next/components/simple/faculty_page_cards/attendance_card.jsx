@@ -9,13 +9,14 @@ import './profile.css';
 
 
 
-class AttendanceCard extends React.Component {
+class FacultyAttendanceCard extends React.Component {
 
   constructor() {
     super();
     this.state = {
       details: []
     };
+    console.log("constr: " + this.state)
   }
 
   componentDidMount() {
@@ -30,13 +31,24 @@ class AttendanceCard extends React.Component {
     )
       .then(res => res.json())
       .then(data => {
-        let details = data.classes[0];
+        let { details } =  this.state;
+        let { id, first_name, middle_name, last_name, gender, nationality, date_of_birth } = data.classes;
+        details = {
+          first_name,
+          middle_name,
+          last_name,
+          date_of_birth,
+          gender,
+          nationality
+        };
+        // TODO: Change this, probably. ! important
+        localStorage.setItem('userid', id);
         this.setState({
           details
         });
       })
       .catch(err => {
-        console.error("Error in AttendanceCard: " + err);
+        console.error("Error in ProfileCard: " + err);
       })
       ;
 
@@ -47,19 +59,25 @@ class AttendanceCard extends React.Component {
   }
 
   getHeader() {
-    return ['Course Code', 'Course Name', 'Faculty', 'Attendance'].map((key, index) => <th key={key}>{key}</th>)
+    var keys = this.getKeys();
+    return keys.map((key, index) => <th key={key}>{key}</th>)
   }
 
+  // getRowData(row, i) {
+  //   var keys = this.getKeys();
+  //   return keys.map((key, index) => <td key={i}></td>)
+  // }
+
   getRowsData = function(){
-    var items = this.state.details;
+    var items = testData;
     var keys = this.getKeys();
-    return items.map((row, index) => {
+    return items.map((row, index)=>{
       return (
             <tr>
-              <td>{row.official_course_id}</td>
-              <td>{row.name}</td>
-              <td>{row.first_name + ' ' + row.last_name}</td>
-              <td>{(row.value*100/row.max_value).toFixed(2)}%</td>
+              <td>{row['Course Code']}</td>
+              <td>{row['Course Name']}</td>
+              <td>{row['Faculty']}</td>
+              <td>{row['Attendance']}</td>
             </tr>)
     })
   }
@@ -105,4 +123,4 @@ const testData = [{
   Attendance: '100'
 }]
 
-export default AttendanceCard;
+export default FacultyAttendanceCard;
