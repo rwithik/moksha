@@ -14,7 +14,7 @@ constructor() {
     super();
     this.state = {
       tabControl: {
-        active: "2"
+        active: "3"
       }
     };
     console.log("constr: " + this.state)
@@ -87,11 +87,11 @@ const tabStyleActive = {
 }
 
 const tabStyleInactive = {
-  
+
 }
 
 const navItem = {
-  // borderColor: '#000' 
+  // borderColor: '#000'
   borderBottom: '100px'
 }
 
